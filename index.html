@@ -56,5 +56,44 @@
 			<ul class="task-list" id="list-done"></ul>
 		</section>
 	</main>
+
+	<!-- Create a modal <div> (hidden by default) with: title input, description textarea, 
+	priority <select>, due date picker, Save and Cancel buttons -->
+	<div id="modal-overlay" class="modal-overlay">
+		<div class="modal">
+			<h2 id="modal-title">Add Task</h2>
+
+			<div class="form-group">
+				<label for="input-title">Title</label>
+				<input type="text" id="input-title" placeholder="Task title" />
+			</div>
+
+			<div class="form-group">
+				<label for="input-desc">Description</label>
+				<textarea id="input-desc" rows="3" placeholder="Optional description"></textarea>
+			</div>
+
+			<div class="form-row">
+				<div class="form-group">
+					<label for="input-priority">Priority</label>
+					<select id="input-priority">
+						<option value="low">Low</option>
+						<option value="medium">Medium</option>
+						<option value="high">High</option>
+					</select>
+				</div>
+
+				<div class="form-group">
+					<label for="input-due">Due date</label>
+					<input type="date" id="inpur-due" />
+				</div>
+			</div>
+
+			<div class="modal-actions">
+				<button id="btn-save" data-mode="add">Save</button>
+				<button id="btn-cancel">Cancel</button>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

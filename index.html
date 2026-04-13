@@ -28,14 +28,32 @@
 	<!-- Create three columns using <section id="todo">, 
 	<section id="inprogress">, <section id="done"> -->
 	<main class="board">
-		<section id="todo" class="column">
+		<!-- Each column needs: a heading, a task list 
+		(<ul>), and an "Add Task" button -->
 
+		<section id="todo" class="column">
+			<div class="column=header">
+				<h2>To Do</h2>
+				<button class="btn-add" data-column="todo">+ Add Task</button>
+			</div>
+			<ul class="task-list" id="list-todo"></ul>
 		</section>
 
 		<section id="inprogress" class="column">
+			<div class="column-header">
+				<h2>In Progress</h2>
+				<button class="btn-add" data-column="inprogress">+ Add Task</button>
+			</div>
+			<ul class="task-list" id="list-inprogress"></ul>
 		</section>
 
 		<section id="done" class="column">
+			<div class="column-header">
+				<h2>Done</h2>
+				<button class="btn-add" data-column="done">+ Add Task</button>
+			</div>
+			<button class="btn-clr-done" id="clear-done">Clear All</button>
+			<ul class="task-list" id="list-done"></ul>
 		</section>
 	</main>
 </body>

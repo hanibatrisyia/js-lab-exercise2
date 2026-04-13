@@ -6,10 +6,22 @@
 	<title>Kanban Task Board</title>
 </head>
 <body>
+	<!-- Create a <header> with an app title and a
+	task counter badge (updated by JS) -->
 	<header>
 		<div class="header-left">
 			<h1>My Task Board</h1>
 			<span id="task-count" class="badge">0 tasks</span>
+		</div>
+		<!-- Add a priority filter <select> dropdown in the header -->
+		<div class="header-right">
+			<label for="priority-filter">Filters:</label>
+			<select id="priority-filter">
+				<option value="all">All Priorities</option>
+				<option value="high">High Priorities</option>
+				<option value="medium">Medium Priorities</option>
+				<option value="low">Low Priorities</option>
+			</select>
 		</div>
 	</header>
 </body>

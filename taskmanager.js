@@ -86,7 +86,13 @@ function createTaskCard(taskObj) {
 /* appends a new card to the right 
 column and updates the task counter */
 function addTask(columnId, taskObj) {
+	tasks.push(taskObj); //store task in in-memory array
+	const card = createTaskCard(taskObj); //build card element
 
+	const listEl = document.getElementById('list-' + columnId);
+	listEl.appendChild(card);
+
+	updateCounter();
 }
 
 /* adds a CSS fade-out animation class, 

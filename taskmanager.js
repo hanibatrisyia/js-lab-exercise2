@@ -7,21 +7,80 @@ let idCounter = 0;
 let currentColumn = 'todo';
 
 // DOM Reference
-const modalOverlay = document.getElementById("modal-overlay");
-const btnSave = document.getElementById("btn-save");
-const btnCancel = document.getElementById("btn-cancel");
-const modalTitle = document.getElementById("modal-title");
-const inputTitle = document.getElementById("input-title");
-const inputDesc = document.getElementById("input-desc");
-const inputPriority = document.getElementById("input-priority");
-const inputDue = document.getElementById("input-due");
-const taskCountBadge = document.getElementById("task-count");
-const priorityFilter = document.getElementById("priority-filter");
+const modalOverlay = document.getElementById('modal-overlay');
+const btnSave = document.getElementById('btn-save');
+const btnCancel = document.getElementById('btn-cancel');
+const modalTitle = document.getElementById('modal-title');
+const inputTitle = document.getElementById('input-title');
+const inputDesc = document.getElementById('input-desc');
+const inputPriority = document.getElementById('input-priority');
+const inputDue = document.getElementById('input-due');
+const taskCountBadge = document.getElementById('task-count');
+const priorityFilter = document.getElementById('priority-filter');
 
 /* returns a <li> containing: title, description, 
 priority badge, due date, Edit button, Delete button */
 function createTaskCard(taskObj) {
+	const li = document.createElement('li'); /* create brand new html element */
+	li.classList.add('task-card'); /*add task-card class to li element*/
 
+	/* set attribute (ex: data-id) to element li */
+	li.setAttribute('data-id', taskObj.id); 
+	li.setAttribute('data-priority', taskObj.priority);
+
+	// TITLE
+	const titleEl = document.createElement('span');
+	titleEl.classList.add('task-title');
+	titleEl.textContent = taskObj.title;
+	//  Double-clicking a task title replaces it with an <input>
+	titleEl.addEventListener('dblclick', () => startInlineEdit(li, titleE1, taskObj));
+
+	// DESCRIPTION
+	const descEl = document.createElement('p');
+	descEl.classList.add('task-desc');
+	descEl.textContent = taskObj.desc || ''; //empty string if no desc (optional)
+
+	// META ROW (PRIORITY + DUE)
+	const metaEl = document.createElement('div');
+	metaEl.classList.add('task-meta');
+
+	// PRIORITY BADGE
+	const badgeE1 = document.createElement('span');
+	badgeEl.classList.add('priority-badge', taskObj.priority);
+	badgeEl.textContent = taskObj.priority;
+
+	// DUE DATE
+	const dueEl = document.createElement('span');
+	dueEl.classList.add('task-due');
+	dueEl.textContent = taskObj.due ? 'Due: ' + taskObj.due : '';
+
+	metaEl.appendChild(badgeEl);
+	metaEl.appendChild(dueEl);
+
+	// ACTION BUTTONS (EDIT/DELETE)
+	const actionsEl = document.createElement('div');
+	actionsEl.classList.add('task-actions');
+	// EDIT
+	const editBtn = document.createElement('button');
+	editBtn.textContent = 'Edit';
+	editBtn.setAttribute('data-action', 'edit');
+	editBtn.setAttribute('data-id', taskObj.id);
+	// DELETE
+	const deleteBtn = document.createElement('button');
+	deleteBtn.textContent = 'Delete';
+	deleteBtn.setAttribute('data-action', 'delete');
+	deleteBtn.setAttribute('data-id', taskObj.id);
+
+	actionsEl.appendChild(editBtn);
+	actionsEl.appendChild(deleteBtn);
+
+	// assemble card
+	li.appendChild(titleEl);
+	li.appendChild(descEl);
+	li.appendChild(metaEl);
+	li.appendChild(actionsEl);
+
+	return li;
 }
 
 /* appends a new card to the right 

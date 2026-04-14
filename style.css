@@ -118,3 +118,90 @@ header select {
 	border-color: #b80000;
 	color: white;
 }
+
+/* task list */
+.task-list {
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+	flex: 1;
+}
+
+/* modal */
+.modal {
+	background: white;
+	border-radius: 14px;
+	padding: 2rem;
+	width: min(460px, 92vw);
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	box-shadow: 0 8px 32px rgba(0,0,0,0,.18);
+}
+
+.form-group {
+	display: flex;
+	flex-direction: column;
+	gap: 0.3rem;
+}
+
+.form-group label {
+	font-size: 0.82rem;
+	font-weight: 600;
+	color: blue;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+	padding: 0.5rem 0.7rem;
+	border: 1px solid gray;
+	border-radius: 7px;
+	font-size: 0.9rem;
+	font-family: inherit;
+	outline: none;
+	transition: border-color 0.15s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+	border-color: #fa6496;
+}
+
+.form-row {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1rem;
+}
+
+.modal-actions {
+	display: flex;
+	gap: 0.75rem;
+	justify-content: flex-end;
+}
+
+.modal-actions button {
+	padding: 0.5rem 1.2rem;
+	border-radius: 7px;
+	border: none;
+	font-size: 0.9rem;
+	font-weight: 600;
+	cursor: pointer;
+	transition: background 0.15s;
+}
+
+#btn-save {
+	background: #adcdff;
+	color: blue;
+}
+
+#btn-save:hover {
+	background: #fa6496;
+	color: white;
+}
+
+#btn-cancel:hover {
+	background: gray;
+}

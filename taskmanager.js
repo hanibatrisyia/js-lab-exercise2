@@ -177,3 +177,30 @@ function eventDelegation() {
 		});
 	});
 }
+
+/* INLINE EDITING - Double-clicking a task title replaces it with 
+an <input>. Pressing Enter or moving focus away commits the change. */
+function startInlineEdit(card, titleEl, taskObj) {
+	const input = document.createElement('input');
+	input.classList.add('task-title-input');
+	input.value = taskObj.title;
+
+	card.replaceChild(input, titleEl);
+	input.focus();
+	input.select();
+
+	function commitEdit() {
+		const newTitle = input.value.trim() || taskObj.title;
+		taskObj.title = newTitle;
+
+		card.replaceChild(titleEl, input);
+	}
+
+	input.addEventListener('keydown', (e) => {
+		if (e.key === 'Enter') {
+			input.blur();
+		}
+	});
+
+	input.addEventListener('blur', commitEdit);
+}

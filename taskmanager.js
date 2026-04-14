@@ -217,3 +217,24 @@ function applyFilter() {
 		card.classList.toggle('is-hidden', shouldHide);
 	});
 }
+
+/* CLEAR DONE - A "Clear All" button removes every card from the Done 
+column with a staggered fade-out (each card fades 100 ms after the previous) */
+function clearDone() {
+	const doneList = document.getElementById('list-done');
+	const cards = Array.from(doneList.querySelectorAll('.task-card'));
+
+	cards.forEach((card, index) => {
+		setTimeout(() => {
+			card.classList.add('fade-out');
+
+			setTimeout(() => {
+				const taskId = card.getAttribute('data-id');
+				card.remove();
+				const idx = tasks.findIndex(t => t.id === taskId);
+				if(idx !== -1) tasks.splice(idx, 1);
+				updateCounter();
+			}, 300);
+		}, index * 100);
+	});
+}

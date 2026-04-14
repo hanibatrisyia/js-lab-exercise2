@@ -204,3 +204,16 @@ function startInlineEdit(card, titleEl, taskObj) {
 
 	input.addEventListener('blur', commitEdit);
 }
+
+/* PRIORITY FILTER - When a priority is chosen, hide non-matching cards 
+using classList.toggle('is-hidden', condition) — not style.display */
+function applyFilter() {
+	const selected = priorityFilter.value;
+	const allCards = document.querySelectorAll('.task-card');
+
+	allCards.forEach(card => {
+		const priority = card.getAttribute('data-priority');
+		const shouldHide = selected !== 'all' && priority !== selected;
+		card.classList.toggle('is-hidden', shouldHide);
+	});
+}

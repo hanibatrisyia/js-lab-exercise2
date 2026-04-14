@@ -11,3 +11,44 @@ body {
 	padding: 2rem 1.5rem;
 }
 
+/* header */
+header {
+	background: white; border-radius: 1.5rem;
+	padding: 1.5rem 2rem; margin-bottom: 2rem;
+	box-shadow: 0 4px 12px rgba(0,0,0,0,.05);
+	border: 1px solid #cbd5e1;
+}
+
+.header-left {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+
+header h1 {
+	font-size: 1.8rem;
+	background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+	-webkit-background-clip: text; background-clip: text;
+	color: transparent;
+}
+
+.badge {
+	background: #e0e7ff; color: #1e40af;
+	padding: 0.2rem 0.8rem; border-radius: 20px;
+	font-size: 0.75rem; font-weight: 600;
+	display: inline-block; margin-top: 0.5rem;
+}
+
+.header-right {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	font-size: 0.9rem;
+}
+
+header select {
+	padding: 0.3rem 0.5rem;
+	border-radius: 6px;
+	border: none;
+	font-size: 0.9rem;
+}

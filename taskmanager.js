@@ -117,11 +117,40 @@ function deleteTask(taskId) {
 
 // opens the modal pre-filled with that task's existing data
 function editTask(taskId) {
+	const task = tasks.find(t => t.id === taskId);
+	if (!task) return;
 
+	inputTitle.value = task.title;
+	inputDesc.value = task.desc;
+	inputPriority.value = task.priority;
+	inputDue.value = task.due;
+
+	modalTitle.textContent = 'Edit Task';
+
+	btnSave.setAttribute('data-mode', 'edit');
+	btnSave.setAttribue('data-id', taskId);
+
+	openModal();
 }
 
 /* updates the task object in the tasks array 
 and refreshes the matching card's DOM content */
 function updateTask(taskId, updatedData) {
+	const task = tasks.find(t => t.id === taskId);
+	if(!task) return;
+	Object.assign(task, updatedData);
 
+	const card = document.querySelector('[data-id="' + taskId + '"]');
+	if(!card) return;
+
+	card.setAttribute('data-priority', task.priority);
+
+	card.querySelector('.task-title').textContent = task.title;
+	card.querySelector('.task-desc').textContent = task.desc || '';
+	card.querySelector('.task-due').textContent = task.due ? 'Due: ' + task.due: '';
+
+	const badge = card.querySelector('.priority-badge');
+	badge.textContent = task.priority;
+	badge.className = '';
+	badge.classList.add('priority-badge', task.priority);
 }

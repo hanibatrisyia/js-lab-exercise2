@@ -84,3 +84,37 @@ header select {
 .column h2 {
 	font-size: 1rem;
 }
+
+/* buttons */
+.btn-add {
+	background: #fa6496;
+	color: white;
+	border: none;
+	padding:  0.3rem 0.75rem;
+	border-radius: 6px;
+	cursor: pointer;
+	font-size: 0.82rem;
+	transition: background 0.15s;
+}
+
+.btn-add:hover {
+	background: #ff9ebe;
+}
+
+.btn-clr-done {
+	background: white;
+	border: 1px solid #b80000;
+	color: #b80000;
+	padding: 0.25rem 0.6rem;
+	border-radius: 6px;
+	cursor: pointer;
+	font-size: 0.8rem;
+	transition: all 0.15s;
+	align-self: flex-end;
+}
+
+.btn-clr-done:hover {
+	background: #b80000;
+	border-color: #b80000;
+	color: white;
+}

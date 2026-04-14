@@ -154,3 +154,26 @@ function updateTask(taskId, updatedData) {
 	badge.className = '';
 	badge.classList.add('priority-badge', task.priority);
 }
+
+/* EVENT DELEGATION - Attach a single click listener to each column's <ul> that handles 
+both Edit and Delete button clicks using data-action and data-id attributes */
+function eventDelegation() {
+	const lists = document.querySelectorAll('.task-list');
+
+	lists.forEach(list => {
+		list.addEventListener('click', (event) => {
+			const action = event.target.getAttribute('data-action');
+			const taskId = event.target.getAttribute('data-id');
+
+			if (!action || !taskId) return;
+
+			if (action === 'delete') {
+				deleteTask(taskId);
+			}
+
+			else if (action === 'edit') {
+				editTask(taskId);
+			}
+		});
+	});
+}

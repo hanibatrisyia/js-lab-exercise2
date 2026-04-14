@@ -54,6 +54,7 @@ function createTaskCard(taskObj) {
 	dueEl.classList.add('task-due');
 	dueEl.textContent = taskObj.due ? 'Due: ' + taskObj.due : '';
 
+	// parent.appendChild(child) - insert child element (badgeEl) inside parent (metaEl)
 	metaEl.appendChild(badgeEl);
 	metaEl.appendChild(dueEl);
 
@@ -98,7 +99,20 @@ function addTask(columnId, taskObj) {
 /* adds a CSS fade-out animation class, 
 then removes the card after the animation ends */
 function deleteTask(taskId) {
+	// querySelector - search matching element
+	const card = document.querySelector('[data-id="' + taskId + '"]');
+	if (!card) return;
 
+	// fade out aniamtion
+	card.classList.add('fade-out');
+
+	setTimeout(() => {
+		card.remove(); // remove card from array
+		const idx = tasks.findIndex(t => t.id === taskId);
+		if (idx !== -1) tasks.splice(idx, 1);
+		updateCounter();
+		applyFilter();
+	}, 300); // transition duration, 300ms
 }
 
 // opens the modal pre-filled with that task's existing data

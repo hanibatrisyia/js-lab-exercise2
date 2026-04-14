@@ -238,3 +238,110 @@ function clearDone() {
 		}, index * 100);
 	});
 }
+
+// MODAL HELPERS
+function openModal() {
+	modalOverlay.classList.add('is-visible');
+	inputTitle.focus();
+}
+
+function closeModal() {
+	modalOverlay.classList.remove('is-visible');
+	resetModalForm();
+}
+
+function resetModalForm() {
+	inputTitle.value = '';
+	inputDesc.value = '';
+	inputPriority.value = 'medium';
+	inputDue.value = '';
+	modalTitle.textContent = 'Add Task';
+	btnSave.setAttribute('data-mode', 'add');
+	btnSave.removeAttribute('data-id');
+}
+
+// COUNTER UPDATE
+function updateCounter() {
+	taskCountBadge.textContent = tasks.length + (tasks.length === 1 ? ' task ' : ' tasks');
+}
+
+// MAIN SETUP
+function init() {
+	// Add task button
+	document.querySelectorAll(.'btn-add').forEach(btn => {
+		btn.addEventListener('click', () => {
+			currentColumn = btn.getAttribute('data-column');
+			btnSave.setAttribute('data-mode', 'add');
+			modalTitle.textContent = 'Add Task';
+			openModal();
+		});
+	});
+
+	// Save button
+	btnSave.addEventListener('click', () => {
+		if (!title) {
+			inputTitle.focus();
+			inputTitle.style.borderColor = '#e94560';
+			return;
+		}
+		inputTitle.style.borderColor = '';
+
+		const mode = btnSave.getAttribute('data-mode');
+		const taskId = btnSave.getAttribute('data-id');
+
+		if (mode === 'edit' && taskId) {
+	      updateTask(taskId, {
+	        title:    title,
+	        desc:     inputDesc.value.trim(),
+	        priority: inputPriority.value,
+	        due:      inputDue.value
+	      });
+	    } else {
+	      idCounter++;
+	      const newTask = {
+	        id:       'task-' + Date.now() + '-' + idCounter,
+	        title:    title,
+	        desc:     inputDesc.value.trim(),
+	        priority: inputPriority.value,
+	        due:      inputDue.value,
+	        column:   currentColumn
+      };
+      addTask(currentColumn, newTask);
+    }
+    closeModal();
+	});
+
+	// Cancel button
+	btnCancel.addEventListener('click', closeModal);
+
+	modalOverlay.addEventListener('click', (e) => {
+		if (e.target === modalOverlay) closeModal();
+	});
+
+	document.addEventListener('keydown', (e) => {
+		if (e.key === 'Escape') closeModal();
+	});
+
+	priorityFilter.addEventListener('change', applyFilter);
+	document.getElementById('clea-done').addEventListener('click', clearDone);
+	eventDelegation();
+
+	// 	EXAMPLE DATA
+	addTask('todo', {
+	    id: 'task-demo-1', title: 'Design wireframes',
+	    desc: 'Sketch the main screens', priority: 'high',
+	    due: '2025-08-01', column: 'todo'
+	  });
+  	addTask('inprogress', {
+		    id: 'task-demo-2', title: 'Write unit tests',
+		    desc: '', priority: 'medium',
+		    due: '2025-08-05', column: 'inprogress'
+		  });
+  	addTask('done', {
+	    id: 'task-demo-3', title: 'Set up repository',
+	    desc: 'GitHub, branching strategy', priority: 'low',
+	    due: '', column: 'done'
+	});
+}
+
+init();

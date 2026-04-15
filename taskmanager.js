@@ -33,7 +33,7 @@ function createTaskCard(taskObj) {
 	titleEl.classList.add('task-title');
 	titleEl.textContent = taskObj.title;
 	//  Double-clicking a task title replaces it with an <input>
-	titleEl.addEventListener('dblclick', () => startInlineEdit(li, titleE1, taskObj));
+	titleEl.addEventListener('dblclick', () => startInlineEdit(li, titleEl, taskObj));
 
 	// DESCRIPTION
 	const descEl = document.createElement('p');
@@ -45,7 +45,7 @@ function createTaskCard(taskObj) {
 	metaEl.classList.add('task-meta');
 
 	// PRIORITY BADGE
-	const badgeE1 = document.createElement('span');
+	const badgeEl = document.createElement('span');
 	badgeEl.classList.add('priority-badge', taskObj.priority);
 	badgeEl.textContent = taskObj.priority;
 
@@ -128,7 +128,7 @@ function editTask(taskId) {
 	modalTitle.textContent = 'Edit Task';
 
 	btnSave.setAttribute('data-mode', 'edit');
-	btnSave.setAttribue('data-id', taskId);
+	btnSave.setAttribute('data-id', taskId);
 
 	openModal();
 }
@@ -268,7 +268,7 @@ function updateCounter() {
 // MAIN SETUP
 function init() {
 	// Add task button
-	document.querySelectorAll(.'btn-add').forEach(btn => {
+	document.querySelectorAll('.btn-add').forEach(btn => {
 		btn.addEventListener('click', () => {
 			currentColumn = btn.getAttribute('data-column');
 			btnSave.setAttribute('data-mode', 'add');
@@ -279,6 +279,7 @@ function init() {
 
 	// Save button
 	btnSave.addEventListener('click', () => {
+		const title = inputTitle.value.trim();
 		if (!title) {
 			inputTitle.focus();
 			inputTitle.style.borderColor = '#e94560';
@@ -323,7 +324,7 @@ function init() {
 	});
 
 	priorityFilter.addEventListener('change', applyFilter);
-	document.getElementById('clea-done').addEventListener('click', clearDone);
+	document.getElementById('clear-done').addEventListener('click', clearDone);
 	eventDelegation();
 
 	// 	EXAMPLE DATA

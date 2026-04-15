@@ -128,6 +128,103 @@ header select {
 	flex: 1;
 }
 
+/* task card */
+.task-card {
+	background: white;
+	border-radius: 10px;
+	padding: 0.75rem 1rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.4rem;
+	border-left: 4px solid blue;
+	position: relative;
+	transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.task-card[data-priority="high"]   { border-left-color: red; }
+.task-card[data-priority="medium"] { border-left-color: yellow; }
+.task-card[data-priority="low"]    { border-left-color: green; }
+
+.task-title {
+	font-weight: 600;
+	font-size: 0.95rem;
+	cursor: pointer;
+}
+
+
+.task-meta {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	flex-wrap: wrap;
+}
+
+.priority-badge {
+	font-size: 0.72rem;
+	font-weight: 700;
+	padding: 0.15rem 0.5rem;
+	border-radius: 999px;
+	letter-spacing: 0.04em;
+}
+
+.priority-badge.high   { background: #fde8ec; color: #c0253b; }
+.priority-badge.medium { background: #fef3e2; color: #b07a10; }
+.priority-badge.low    { background: #e8f5e9; color: #2e7d32; }
+
+.task-due {
+	font-size: 0.7rem;
+	color: #b80000;
+}
+
+.task-actions {
+	display: flex;
+	gap: 0.4rem;
+}
+
+.task-actions button {
+	font-size: 0.75rem;
+  	padding: 0.2rem 0.55rem;
+  	border-radius: 5px;
+  	border: 1px solid #ddd;
+  	background: #fff;
+  	cursor: pointer;
+  	transition: all 0.15s;
+}
+
+.task-actions button:hover {
+  	border-color: #e94560;
+  	color: #e94560;
+}
+
+/* utility classes */
+.is-hidden {
+	display: none;
+}
+
+.fade-out {
+	opacity: 0;
+	transform: scale(0.93);
+	pointer-events: none;
+}
+
+.modal-overlay {
+  	position: fixed;
+  	inset: 0;
+  	background: rgba(0,0,0,0.45);
+  	display: flex;
+  	align-items: center;
+  	justify-content: center;
+  	z-index: 100;
+  	opacity: 0;
+  	pointer-events: none;
+  	transition: opacity 0.2s;
+}
+ 
+.modal-overlay.is-visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
 /* modal */
 .modal {
 	background: white;
@@ -204,4 +301,11 @@ header select {
 
 #btn-cancel:hover {
 	background: gray;
+}
+
+@media (max-width: 768px) {
+	.board {
+		grid-template-columns: 1fr;
+		padding: 1rem;
+	}
 }
